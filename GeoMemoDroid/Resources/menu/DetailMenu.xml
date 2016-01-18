@@ -1,0 +1,12 @@
+﻿<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:id="@+id/actionEdit"
+        android:icon="@drawable/ic_edit"
+        android:title="Edit"
+        android:showAsAction="ifRoom"/>
+  <item android:id="@+id/actionPhotos"
+        android:title="Photos"
+        android:showAsAction="never"/>
+  <item android:id="@+id/actionDirections"
+        android:title="Directions"
+        android:showAsAction="never"/>
+</menu>
