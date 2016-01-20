@@ -53,6 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DetailActivity.cs" />
+    <Compile Include="EditActivity.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="LocationsAdapter.cs" />
     <Compile Include="LocationsData.cs" />
