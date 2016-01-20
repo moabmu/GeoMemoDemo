@@ -40,7 +40,7 @@ namespace GeoMemoDroid
             _adapter.NotifyDataSetChanged();
         }
 
-        private void LocationsListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        protected void LocationsListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
             Intent intent = new Intent(this, typeof(DetailActivity));
             intent.PutExtra("locationid", _adapter[e.Position].Id);
