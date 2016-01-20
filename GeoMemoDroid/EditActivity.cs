@@ -16,6 +16,7 @@ namespace GeoMemoDroid
     public class EditActivity : Activity
     {
         Location _location;
+
         EditText _nameEditText;
         EditText _descrEditText;
         EditText _phoneEditText;
@@ -25,8 +26,6 @@ namespace GeoMemoDroid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            // Create your application here
 
             SetContentView(Resource.Layout.Edit);
 
@@ -44,55 +43,13 @@ namespace GeoMemoDroid
             _latEditText = FindViewById<EditText>(Resource.Id.latEditText);
             _longEditText = FindViewById<EditText>(Resource.Id.longEditText);
 
-            LocationToUI();
-
-        }
-
-        public override bool OnCreateOptionsMenu(IMenu menu)
-        {
-            MenuInflater.Inflate(Resource.Menu.EditMenu, menu);
-            return base.OnCreateOptionsMenu(menu);
+            //LocationToUI();
         }
 
         protected override void OnResume()
         {
             base.OnResume();
             LocationToUI();
-        }
-
-        public override bool OnOptionsItemSelected(IMenuItem item)
-        {
-            switch(item.ItemId)
-            {
-                case Resource.Id.actionSave:
-                    SaveLocation();
-                    return true;
-                case Resource.Id.actionDelete:
-                    DeleteLocation();
-                    return true;
-            }
-            return base.OnOptionsItemSelected(item);
-        }
-
-        protected void DeleteLocation()
-        {
-            LocationsData.Instance.Delete(_location);
-
-            Intent returnIntent = new Intent();
-            Intent.PutExtra("locationdeleted", true);
-            SetResult(Result.Ok, returnIntent);
-            Finish();
-        }
-
-        protected void SaveLocation()
-        {
-            UIToLocation();
-            LocationsData.Instance.Save(_location);
-
-            Intent returnIntent = new Intent();
-            Intent.PutExtra("locationdeleted", false);
-            SetResult(Result.Ok, returnIntent);
-            Finish();
         }
 
         protected void LocationToUI()
@@ -119,6 +76,48 @@ namespace GeoMemoDroid
                 _location.Longitude = Double.Parse(_longEditText.Text);
             else
                 _location.Longitude = null;
+        }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.EditMenu, menu);
+            return base.OnCreateOptionsMenu(menu);
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.actionSave:
+                    SaveLocation();
+                    return true;
+                case Resource.Id.actionDelete:
+                    DeleteLocation();
+                    return true;
+                default:
+                    return base.OnOptionsItemSelected(item);
+            }
+        }
+
+        protected void DeleteLocation()
+        {
+            LocationsData.Instance.Delete(_location);
+
+            Intent returnIntent = new Intent();
+            returnIntent.PutExtra("locationdeleted", true);
+            SetResult(Result.Ok, returnIntent);
+            Finish();
+        }
+
+        protected void SaveLocation()
+        {
+            UIToLocation();
+            LocationsData.Instance.Save(_location);
+
+            Intent returnIntent = new Intent();
+            returnIntent.PutExtra("locationdeleted", false);
+            SetResult(Result.Ok, returnIntent);
+            Finish();
         }
     }
 }
